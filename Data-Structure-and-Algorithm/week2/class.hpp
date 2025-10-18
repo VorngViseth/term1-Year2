@@ -196,7 +196,7 @@ public:
         prevSec = current;
         secNode = current->next;
 
-        if(prevFrist    )
+        // if(prevFrist    )
 
     }
 };
