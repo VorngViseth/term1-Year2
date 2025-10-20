@@ -73,6 +73,7 @@ public:
         if (pos == 0)
         {
             insertFront(value);
+
             return;
         }
 
@@ -170,33 +171,69 @@ public:
         cout << current->value << endl;
     }
 
-    void swapTwoNodes(int posFisrtNode, int posSecNode)
+    void swapTwoNodes(int posFirstNode, int posSecNode)
     {
-        if (head == nullptr || size == 1)
+        if (head == nullptr || size < 2)
         {
-            cout << "The list is empty/not enough" << endl;
+            cout << "The list is empty or has only one node!" << endl;
             return;
         }
 
-        if (posFisrtNode < 0 || posSecNode >= size)
+        if (posFirstNode < 0 || posSecNode < 0 || posFirstNode >= size || posSecNode >= size)
         {
-            cout << "Error" << endl;
+            cout << "Invalid positions!" << endl;
             return;
         }
 
-        Node *prevFrist;
-        Node *firstNode;
-        _traverseTill(posFisrtNode);
-        prevFrist = current;
-        firstNode = current->next;
+        if (posFirstNode == posSecNode)
+        {
+            cout << "Positions are the same, nothing to swap." << endl;
+            return;
+        }
 
-        Node *prevSec;
-        Node *secNode;
-        _traverseTill(posSecNode);
-        prevSec = current;
-        secNode = current->next;
+        // Ensure posFirstNode < posSecNode
+        if (posFirstNode > posSecNode)
+            swap(posFirstNode, posSecNode);
 
-        // if(prevFrist    )
+        Node *prev1 = nullptr;
+        Node *node1 = head;
+        if (posFirstNode > 0)
+        {
+            _traverseTill(posFirstNode);
+            prev1 = current;
+            node1 = prev1->next;
+        }
 
+        Node *prev2 = nullptr;
+        Node *node2 = head;
+        if (posSecNode > 0)
+        {
+            _traverseTill(posSecNode);
+            prev2 = current;
+            node2 = prev2->next;
+        }
+
+        // If one of them is the head
+        if (prev1 != nullptr)
+            prev1->next = node2;
+        else
+            head = node2;
+
+        if (prev2 != nullptr)
+            prev2->next = node1;
+        else
+            head = node1;
+
+        // Swap next pointers
+        Node *temp = node1->next;
+        node1->next = node2->next;
+        node2->next = temp;
+
+        // Update tail if needed
+        if (node1->next == nullptr)
+            tail = node1;
+        else if (node2->next == nullptr)
+            tail = node2;
     }
+
 };

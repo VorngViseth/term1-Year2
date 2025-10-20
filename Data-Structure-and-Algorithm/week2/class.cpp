@@ -13,7 +13,7 @@ int main() {
     list.insertBack(4);
     list.insertMiddle(2);
     // list.deleteMiddle();
-    list.swapTwoNodes(0, 1);
+    list.swapTwoNodes(0, 2);
 
     list.print();
     cout << "the size of list is : " << list.getSize() << endl;
