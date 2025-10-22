@@ -48,9 +48,10 @@ public:
     {
         Node *newNode = new Node{value, nullptr};
         newNode->next = head;
-        head = newNode;
+        head = newNode; 
         if (size == 0)
-            tail = newNode;
+            head = tail = newNode;
+            tail->next = head;
         size++;
     }
 
@@ -66,6 +67,7 @@ public:
         tail->next = newNode;
         size++;
         tail = newNode;
+        tail->next = head;
     }
 
     void insertAt(int pos, int value)
@@ -237,4 +239,5 @@ public:
     }
 
 };
+
 
