@@ -9,6 +9,7 @@ body {
     height: 100vh;
     font-family: monospace;
 }
+
 .profile {  
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
@@ -16,6 +17,8 @@ body {
     border-radius: 30px;
     color: white;
     width: 600px;
+    font-size: large;  
+    padding: 30PX;
 }
 
 h1 {
@@ -31,14 +34,6 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-}
-
-.fotter {
-    font-size: large;  
-    padding-left: 30px ;
-    padding-right: 30px;
-    padding-bottom: 30px;
 }
 
 button {
