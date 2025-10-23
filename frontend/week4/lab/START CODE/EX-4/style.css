@@ -1,0 +1,58 @@
+body {
+    background-image: url('img/knights-canyon-challenge-dragon-digital-painting.jpg');
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    font-family: monospace;
+}
+
+h1 {
+    font-size: 80px;
+}
+
+.profilePicture {
+    width: 200px;
+    border-radius: 100px;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.fotter {
+    font-size: large;  
+    padding-left: 30px ;
+    padding-right: 30px;
+    padding-bottom: 30px;
+}
+
+.profile {  
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    color: white;
+    width: 600px;
+}
+
+button {
+    margin-left: 40%;
+    border-radius: 15px;
+    border: 2px crimson solid;
+    background-color: darkred;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+button:hover {
+    border: 2px #811331 solid;
+    background-color: #AA336A;
+}

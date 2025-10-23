@@ -1,0 +1,31 @@
+body {
+    background: grey;
+    font-family: sans-serif;
+}
+
+div {
+    margin-top: 30px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+button {
+    border-radius: 30px;
+    padding: 10px;
+    border-style: none;
+}
+
+button.green:hover {
+    background-color: green;
+    color: white;
+}
+button.yellow:hover {
+    background-color: yellow;
+}
+button.purple:hover {
+    background-color: purple;
+    color: white;
+}

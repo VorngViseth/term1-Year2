@@ -1,0 +1,15 @@
+/* TODO */
+button {
+    border-radius: 15px;
+    border: 2px rgb(197,91,181) solid;
+    background-color: rgb(235,100,215);
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+button:hover {
+    border: 2px #811331 solid;
+    background-color: #AA336A;
+}
