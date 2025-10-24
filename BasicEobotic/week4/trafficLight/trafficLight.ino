@@ -20,27 +20,35 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  trafficLightStop(redLed2, yellowLed2, greenLed2);
-  trafficLightGo(redLed1, yellowLed1, greenLed1);
-  delay(5000);
-  digitalWrite(redLed2, 0);
-  trafficLightStop(redLed1, yellowLed1, greenLed1);
-  trafficLightGo(redLed2, yellowLed2, greenLed2);
-  delay(5000);
-  digitalWrite(redLed1, 0);
+
+  traffic(greenLed1, yellowLed1, redLed1, greenLed2, yellowLed2, redLed2);
+  traffic(greenLed2, yellowLed2, redLed2, greenLed1, yellowLed1, redLed1);
+
 
 }
 
-void trafficLightGo(int redLed, int yellowLed, int greenLed) {
+void trafficGo(int greenLed, int yellowLed, int redLed){
   digitalWrite(greenLed, 1);
-  digitalWrite(yellowLed, 0);
   digitalWrite(redLed, 0);
+  digitalWrite(yellowLed, 0);
 }
 
-void trafficLightStop(int redLed, int yellowLed, int greenLed){
+void trafficStop(int greenLed, int yellowLed, int redLed){
   digitalWrite(greenLed, 0);
-  digitalWrite(yellowLed, 1);
-  delay(1000);
-  digitalWrite(yellowLed, 0);
   digitalWrite(redLed, 1);
+  digitalWrite(yellowLed, 0);
+}
+void trafficYellow(int greenLed, int yellowLed, int redLed){
+  digitalWrite(greenLed, 0);
+  digitalWrite(redLed, 0);
+  digitalWrite(yellowLed, 1);
+}
+
+void traffic(int green1, int yellow1, int red1, int green2, int yellow2, int red2) {
+  trafficStop(green2, yellow2, red2);
+  delay(500);
+  trafficGo(green1, yellow1, red1);
+  delay(5000);
+  trafficYellow(green1, yellow1, red1);
+  delay(1000);
 }
