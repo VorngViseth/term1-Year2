@@ -18,7 +18,7 @@ body {
     color: white;
     width: 600px;
     font-size: large;  
-    padding: 30PX;
+    padding: 30px;
 }
 
 h1 {
@@ -34,6 +34,8 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 50px;
+    height: 240px;
 }
 
 button {
