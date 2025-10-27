@@ -1,18 +1,18 @@
 #define redLed1 4
 #define greenLed1 5
-#define yellowLed1 12
+#define yellowLed1 18
 
-#define redLed2 13
-#define greenLed2 14
-#define yellowLed2 15
+#define redLed3 19
+#define greenLed3 21
+#define yellowLed3 22
 
-#define redLed3 42
-#define greenLed3 41
-#define yellowLed3 40
+#define redLed4 13
+#define greenLed4 14
+#define yellowLed4  27
 
-#define redLed4 37
-#define greenLed4 39
-#define yellowLed4 38
+#define redLed2 26
+#define greenLed2 25
+#define yellowLed2 33
 
 void setup() {
   // put your setup code here, to run once:
