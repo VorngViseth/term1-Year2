@@ -1,0 +1,12 @@
+// write your answer here ...
+
+BUBBLE SORT 
+
+-  how the algo works
+    it compare 2 elements in an array and swap them if they meet a certain condition.
+    this process will repeats for every pair of elements.
+    the algorithm loop through the array size times until all elements are in the correct order.
+
+- time complexity 
+    best case : no swaping, the algorithm just have to loop size time for 1 time to check each elements, making it O(n)
+    average case :                                          
