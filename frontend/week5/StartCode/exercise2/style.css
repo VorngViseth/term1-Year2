@@ -1,0 +1,45 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background: gray;
+    height: 90vh;
+    border-radius: 10px;
+}
+
+.card {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.a {
+    grid-column: 1/ span 2;
+}
+
+.f {
+    grid-column: 2 / span 2;
+}
+
+p {
+    flex-grow: 1;
+}
+
+
+.pic {
+    width: 150px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.a .pic,
+.f .pic {
+    width: 300px;
+    height: 200px;
+}
