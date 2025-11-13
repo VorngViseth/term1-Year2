@@ -1,0 +1,163 @@
+﻿TP01: Calculate the sum of series of 8 bit numbers (no carry)
+
+
+LXI H 2000
+LDA 2010
+MOV B A
+MVI A 00
+NEXT: ADD M
+INX H
+DCR B
+JNZ NEXT
+STA 2005
+
+
+HLT
+
+
+TP02: Calculate the sum of series of 8 bit numbers (with carry)
+
+
+LXI H 2000
+LDA 2010
+MOV B A
+MVI A 00
+MVI C 00
+NEXT: ADD M
+JNC SKIP
+INR C
+SKIP: INX H
+DCR B
+JNZ NEXT
+STA 2005
+MOV A C
+STA 2006
+
+
+HLT
+
+
+TP03: Calculate the sum of 1+2+..+n
+
+
+LDA 2000
+MOV B A
+MVI A 00
+MVI C 01
+NEXT: ADD C
+INR C
+DCR B
+JNZ NEXT
+STA 2001
+
+
+HLT
+
+
+TP04: write an assembly language to calculate a square of a number
+
+
+MVI H 07
+MVI L 07
+XCHG
+MOV C D
+MVI D 00
+LXI H 0000
+LOOP: DAD D
+DCR C
+JNZ LOOP
+SHLD 2001
+
+
+HLT
+
+
+TP05: write an assembly language to calculate (a+b)^2 and store answer in location 2005
+
+
+LDA 2000
+MOV B A
+LDA 2001
+ADD B
+MOV B A
+MVI A 00
+MOV C B
+LOOP: ADD B
+DCR C
+JNZ LOOP
+STA 2005
+
+
+HLT
+
+
+TP06: write an assembly language to calculate whether m X 2n and store answer in address 2000
+
+
+MVI A 05
+MVI C 03
+LOOP: RLC
+DCR C
+JNZ LOOP
+STA 2000
+
+
+HLT
+
+
+TP07: Write an assembly language to calculate (a-b)^2
+
+
+MVI A 08
+MOV B A
+MVI A 03
+MOV C A
+MOV A B
+SUB C
+MOV D A
+MOV E A
+MVI A 00
+LOOP: ADD D
+DCR E
+JNZ LOOP
+STA 2000
+
+
+HLT
+
+
+TP08: Write an assembly language to calculate whether (a+b)^2 or (a-b)^2
+
+
+MVI A, 01 
+MVI B, 08
+MVI C, 03
+CPI 01
+JZ ADD
+CPI 02
+JZ SUB
+ADD: MOV A, B
+ADD C
+MOV H, A
+MOV L, A
+MVI B, 00
+MVI C, 00
+JMP MULT
+SUB: MOV A, B
+SUB C
+MOV H, A
+MOV L, A
+MVI B, 00
+MVI C,00
+JMP MULT
+MULT: XCHG
+MOV C, D
+MVI D 00
+LXI H 0000
+LOOP: DAD D
+DCR C
+JNZ LOOP
+SHLD 2000
+
+
+HLT

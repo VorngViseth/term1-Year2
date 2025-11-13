@@ -1,0 +1,302 @@
+﻿TP01: Write an assembly language to calculate (a+b)^2 and store the answer in location 2005
+
+
+LDA 2000
+MOV B A
+LDA 2001
+ADD B
+MOV B A
+MVI A 00
+MOV C B
+LOOP: ADD B
+JNC NO_CARRY
+INR D
+NO_CARRY: DCR C
+JNZ LOOP
+STA 2005
+MOV A D
+STA 2006
+
+
+HLT
+
+
+TP02: Write an assembly language to calculate whether m X 2n and store the answer in address 2000
+
+
+LDA 2000
+MOV B A
+LDA 2001
+MOV C A
+MOV A B
+ADD A
+MOV B A
+MVI A 00
+MVI D 00
+LOOP: ADD B
+JNC NO_CARRY
+INR D
+NO_CARRY: DCR C
+JNZ LOOP
+STA 2005
+MOV A D
+STA 2006
+
+
+HLT
+
+
+TP03: Write an assembly language to calculate whether (a+b)^2 or (a-b)^2
+
+
+LXI H 2000
+MOV A M
+INX H
+MOV B M
+INX H
+MOV C M
+
+
+MOV A C
+CPI 01
+JZ ADD
+CPI 02
+JZ SUB
+JMP END
+
+
+ADD: MOV A B
+LXI H 2000
+ADD M
+JMP SQUARE
+
+
+SUB: LXI H 2000
+MOV A M
+INX H
+SUB M
+
+
+SQUARE: MOV C A
+MOV B A
+MVI A 00
+MOV D A
+
+
+MULT: ADD C
+JNC NO_CARRY
+INR D
+NO_CARRY: DCR B
+JNZ MULT
+
+
+STA 2005
+
+
+END: HLT
+
+
+TP04: Write an assembly language to calculate (a+b)^2-2b where (a+b)^2 > 2b
+
+
+LXI H 2000
+MOV B M
+INX H
+MOV C M
+MOV A C
+ADD A
+MOV D A
+MOV A B
+ADD C
+MOV B A
+MVI E 00
+MOV E A
+MVI C 00
+
+
+MULT: ADD B
+JNC NO_CARRY
+INR C
+NO_CARRY: DCR E
+JNZ MULT
+
+
+CMP D
+JNC STORE_A
+MOV A D
+
+
+STORE_A: SUB D
+STA 2005
+HLT
+
+
+TP05: Write an assembly language to calculate (a-b)^2 + 3c
+
+
+LXI H 2000
+MOV B M
+INX H
+MOV C M
+INX H
+MOV D M
+MOV A B
+SUB C
+MOV B A
+MOV E A
+MOV A D
+ADD D
+ADD D
+MOV D A
+MVI A 00
+MVI C 00
+
+
+MULT: ADD B
+JNC NO_CARRY
+INR C
+NO_CARRY: DCR E
+JNZ MULT
+
+
+ADD D
+
+
+STA 2005
+
+
+HLT
+
+
+TP06: Write an assembly language to calculate (a-b)^2 + 4c
+
+
+LXI H 2000
+MOV B M
+INX H
+MOV C M
+INX H
+MOV D M
+MOV A B
+SUB C
+MOV B A
+MOV E A
+MOV A D
+ADD D
+ADD D
+ADD D
+MOV D A
+MVI A 00
+MVI C 00
+
+
+MULT: ADD B
+JNC NO_CARRY
+INR C
+NO_CARRY: DCR E
+JNZ MULT
+
+
+ADD D
+
+
+STA 2005
+
+
+HLT
+
+
+TP07: Write an assembly language to calculate the division of two 8-bit numbers. (a>b)
+
+
+LXI H 2000
+MOV A M
+INX H
+MOV B M
+MVI C 00
+
+
+DIVIDE: CMP B
+JC END
+SUB B
+INR C
+JMP DIVIDE
+
+
+END: MOV D A
+MOV A C
+STA 2005
+MOV A D
+STA 2009
+HLT
+
+
+TP08: Write an assembly language to find minimum value among 5 numbers
+
+
+LXI H 2005
+MOV C M
+DCR C
+LXI H 2000
+MOV A M
+INX H
+
+
+LOOP: CMP M
+JC SKIP
+MOV A M
+SKIP: INX H
+DCR C
+JNZ LOOP
+
+
+STA 2010
+HLT
+
+
+TP09: Write an assembly language to find maximum value among 7 numbers
+
+
+LXI H 2007
+MOV C M
+DCR C
+LXI H 2000
+MOV A M
+INX H
+
+
+LOOP: CMP M
+JNC SKIP
+MOV A M
+SKIP: INX H
+DCR C
+JNZ LOOP
+
+
+STA 2010
+HLT
+
+
+TP10: Write an assembly language to display fibonacci numbers
+
+
+LXI H, 3000
+MVI C, 08
+MVI B, 00
+MVI D, 01
+MOV M, B
+INX H
+
+
+FIB: MOV M, A
+MOV A, B
+ADD D
+MOV B, D
+MOV D, A
+INX H
+MOV M, A
+DCR C
+JNZ FIB
+
+
+HLT

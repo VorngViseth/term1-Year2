@@ -1,0 +1,5 @@
+Binary search tree traversal
+Pre-order traversal : root -> left -> right . use to create a copy of a tree
+In-order traversal : left -> root -> right . 
+Post-order traversal : left -> right -> root . use to delete a tree from leaf to root
+
