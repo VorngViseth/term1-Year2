@@ -1,0 +1,63 @@
+body {
+    margin: 0px;
+}
+.container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    height: 100vh;
+}
+
+.space {
+    flex-grow: 1;
+}
+
+aside {
+    margin: 20px 0px 0px 30px;
+}
+
+.logo {
+    margin-bottom: 80px;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+main {
+    background: lightblue;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+p {
+    flex-grow: 1;
+}
+
+.pic {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: gray;
+    border-radius: 10px;
+}
