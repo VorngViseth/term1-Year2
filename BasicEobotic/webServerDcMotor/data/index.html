@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DC Motor Control</title>
+    <script src="script.js" defer></script>
+</head>
+    <body>
+        <label>
+            <input type="radio" name="power" value="backward"> backward
+        </label>
+
+        <label>
+            <input type="radio" name="power" value="forward" checked> forward
+        </label>
+
+        <p>Current speed : <span id="speedText" class="value">128</span></p>
+
+        <label>
+            <input type="range" min="0" max="255" value="128" id="slider">
+        </label>
+
+    </body>
+</html>
