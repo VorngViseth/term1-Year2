@@ -1,6 +1,6 @@
 #include <WiFi.h>
 #include <WebServer.h>
-#include "SPIFFS.h"
+#include "LittleFS.h"
 
 // Motor driver pins
 #define ATN1 25
@@ -9,7 +9,7 @@
 #define STBY 4
 
 WebServer server(80);
-volatile int motorSpeed = 128;  // 0-255
+volatile int motorSpeed = 100;  // 0-255
 bool forward = true;            // Motor direction
 
 const char* SSID = "Seth At Home";
@@ -17,13 +17,19 @@ const char* PASSWORD = "Seth098573231";
 
 // Serve index.html
 void handleRoot() {
-  File file = SPIFFS.open("/index.html", "r");
-  if (!file) {
+  File fileHtml = LittleFS.open("/index.html", "r");
+  if (!fileHtml) {
     server.send(404, "text/plain", "File not found");
     return;
   }
-  server.streamFile(file, "text/html");
-  file.close();
+  server.streamFile(fileHtml, "text/html");
+  fileHtml.close();
+}
+
+void handleScript() {
+  File fileJs = LittleFS.open("/script.js", "r");
+  server.streamFile(fileJs, "application/javascript");
+  fileJs.close();
 }
 
 // Set motor speed
@@ -37,6 +43,17 @@ void handleSetSpeed() {
   }
 }
 
+void listLittleFS() {
+  Serial.println("Files in LittleFS:");
+  File root = LittleFS.open("/");
+  File file = root.openNextFile();
+  while(file) {
+    Serial.println(file.name());
+    file = root.openNextFile();
+  }
+}
+
+
 void setup() {
   Serial.begin(9600);
 
@@ -48,10 +65,12 @@ void setup() {
   digitalWrite(STBY, HIGH);
 
   // Mount SPIFFS
-  if (!SPIFFS.begin(true)) {
+  if (!LittleFS.begin(true)) {
     Serial.println("Failed to mount SPIFFS");
     return;
   }
+
+  listLittleFS();
 
   // Connect WiFi
   WiFi.begin(SSID, PASSWORD);
@@ -64,8 +83,9 @@ void setup() {
 
   // Routes
   server.on("/", handleRoot);
+  server.on("/script.js", handleScript);
   server.on("/setSpeed", handleSetSpeed);
-
+  
   // Set motor direction
   server.on("/setDirection", HTTP_GET, []() {
     if (server.hasArg("dir")) {
@@ -98,11 +118,11 @@ void loop() {
     digitalWrite(ATN2, HIGH);
   }
 
-  // Software PWM
+  // Software PWM 
   for (int i = 0; i < 255; i++) {
-    digitalWrite(PWMA, HIGH);
-    delayMicroseconds(motorSpeed);
-    digitalWrite(PWMA, LOW);
-    delayMicroseconds(255 - motorSpeed);
+    digitalWrite(PWMA, HIGH); 
+    delayMicroseconds(motorSpeed); 
+    digitalWrite(PWMA, LOW); 
+    delayMicroseconds(255 - motorSpeed); 
   }
 }
