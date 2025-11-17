@@ -9,7 +9,7 @@
 #define STBY 4
 
 WebServer server(80);
-volatile int motorSpeed = 100;  // 0-255
+volatile int motorSpeed = 0;  // 0-255
 bool forward = true;            // Motor direction
 
 const char* SSID = "Seth At Home";
@@ -113,9 +113,11 @@ void loop() {
   if (forward) {
     digitalWrite(ATN1, HIGH);
     digitalWrite(ATN2, LOW);
+    Serial.println("Forward");
   } else {
     digitalWrite(ATN1, LOW);
     digitalWrite(ATN2, HIGH);
+      Serial.println("backward");
   }
 
   // Software PWM 
