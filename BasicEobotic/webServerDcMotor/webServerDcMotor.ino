@@ -90,8 +90,13 @@ void setup() {
   server.on("/setDirection", HTTP_GET, []() {
     if (server.hasArg("dir")) {
       String dir = server.arg("dir");
-      if (dir == "forward") forward = true;
-      else if (dir == "backward") forward = false;
+      if (dir == "forward") {
+        forward = true;
+        Serial.println("Forward");
+      }else if (dir == "backward") {
+        forward = false;
+        Serial.println("backward");
+      }
       server.send(200, "text/plain", "Direction set");
     } else {
       server.send(400, "text/plain", "Missing dir");
@@ -113,11 +118,9 @@ void loop() {
   if (forward) {
     digitalWrite(ATN1, HIGH);
     digitalWrite(ATN2, LOW);
-    Serial.println("Forward");
   } else {
     digitalWrite(ATN1, LOW);
     digitalWrite(ATN2, HIGH);
-      Serial.println("backward");
   }
 
   // Software PWM 
