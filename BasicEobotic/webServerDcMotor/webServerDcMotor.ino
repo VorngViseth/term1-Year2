@@ -12,7 +12,7 @@ WebServer server(80);
 volatile int motorSpeed = 128;  // 0-255
 bool forward = true;            // Motor direction
 
-const char* SSID = "Seth At Home5G";
+const char* SSID = "Seth At Home";
 const char* PASSWORD = "Seth098573231";
 
 // Serve index.html
@@ -38,7 +38,7 @@ void handleSetSpeed() {
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   // Motor pins
   pinMode(ATN1, OUTPUT);
