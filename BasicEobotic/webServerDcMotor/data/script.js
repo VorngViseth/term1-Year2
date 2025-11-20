@@ -3,16 +3,24 @@ const speedText = document.getElementById("speedText");
 const radios = document.getElementsByName("power");
 
 // --- Update motor speed when slider moves ---
-slider.oninput = function() {
+slider.oninput = async function() {
   speedText.innerText = this.value;
-  fetch(`/setSpeed?value=${this.value}`)
+const res= await  fetch("/setSpeedAndDirection",{
+    method: 'POST',
+    body: JSON.stringify({value:this.value}),
+    headers:{'Content-Type':'application/json'}
+});
 };
 
 // --- Update motor direction when radio button changes ---
 radios.forEach(radio => {
-  radio.onchange = function() {
+  radio.onchange = async function() {
     if (this.checked) {
-      fetch(`/setDirection?dir=${this.value}`)
+      const res = await fetch('/setSpeedAndDirection',{
+         method:'POST',
+         body: JSON.stringify({dir:this.value}),
+         headers:{'Content-Type':'application/json'}
+      });
     }
   };
 });

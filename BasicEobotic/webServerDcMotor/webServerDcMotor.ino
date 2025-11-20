@@ -1,5 +1,6 @@
 #include <WiFi.h>
 #include <WebServer.h>
+#include <ArduinoJson.h>
 #include "LittleFS.h"
 
 // Motor driver pins
@@ -10,10 +11,10 @@
 
 WebServer server(80);
 volatile int motorSpeed = 0;  // 0-255
-bool forward = true;            // Motor direction
+bool forward = true;          // Motor direction
 
-const char* SSID = "Seth At Home";
-const char* PASSWORD = "Seth098573231";
+const char* SSID = "CADT-OFFICIALS";
+const char* PASSWORD = "CADT@Ja&0z2kz$";
 
 // Serve index.html
 void handleRoot() {
@@ -32,14 +33,41 @@ void handleScript() {
   fileJs.close();
 }
 
-// Set motor speed
-void handleSetSpeed() {
-  if (server.hasArg("value")) {
-    motorSpeed = server.arg("value").toInt();
-    Serial.printf("Speed updated to: %d\n", motorSpeed);
-    server.send(200, "text/plain", "Speed changed");
+// Unified handler for both speed and direction
+void handleMotorControl() {
+  if (server.hasArg("plain")) {
+    String body = server.arg("plain");
+    
+    StaticJsonDocument<200> doc;
+    DeserializationError error = deserializeJson(doc, body);
+    
+    if (error) {
+      server.send(400, "text/plain", "Invalid JSON");
+      return;
+    }
+    
+    // Handle speed if provided
+    if (doc.containsKey("value")) {
+      motorSpeed = doc["value"];
+      Serial.printf("Speed updated to: %d\n", motorSpeed);
+    }
+    
+    // Handle direction if provided
+    if (doc.containsKey("dir")) {
+      String dir = doc["dir"];
+      if (dir == "forward") {
+        forward = true;
+        Serial.println("Direction: Forward");
+      } else if (dir == "backward") {
+        forward = false;
+        Serial.println("Direction: Backward");
+      }
+    }
+    
+    server.send(200, "text/plain", "Motor control updated");
+    
   } else {
-    server.send(400, "text/plain", "Missing value");
+    server.send(400, "text/plain", "No data received");
   }
 }
 
@@ -53,22 +81,6 @@ void listLittleFS() {
   }
 }
 
-void handleDir() {
-  if (server.hasArg("dir")) {
-    String dir = server.arg("dir");
-    if (dir == "forward") {
-      forward = true;
-      Serial.println("Forward");
-    }else if (dir == "backward") {
-      forward = false;
-      Serial.println("backward");
-    }
-    server.send(200, "text/plain", "Direction set");
-  } else {
-    server.send(400, "text/plain", "Missing dir");
-  }
-}
-
 void setup() {
   Serial.begin(9600);
 
@@ -79,9 +91,9 @@ void setup() {
   pinMode(STBY, OUTPUT);
   digitalWrite(STBY, HIGH);
 
-  // Mount SPIFFS
+  // Mount LittleFS
   if (!LittleFS.begin(true)) {
-    Serial.println("Failed to mount SPIFFS");
+    Serial.println("Failed to mount LittleFS");
     return;
   }
 
@@ -99,9 +111,9 @@ void setup() {
   // Routes
   server.on("/", handleRoot);
   server.on("/script.js", handleScript);
-  server.on("/setSpeed", handleSetSpeed);
-  server.on("/setDirection", handleDir);
+  server.on("/setSpeedAndDirection", HTTP_POST, handleMotorControl);  // Single route for both
 
+  server.enableCORS(true);
   server.begin();
 }
 
