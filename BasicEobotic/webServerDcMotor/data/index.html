@@ -4,22 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DC Motor Control</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-    <body>
-        <label>
-            <input type="radio" name="power" value="backward"> backward
-        </label>
+<body>
+    <div class="control-panel">
+        <h1>DC Motor Control</h1>
+        
+        <div class="direction-control">
+            <span class="direction-label">Motor Direction:</span>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" name="power" value="backward" id="backward">
+                    <label for="backward">Backward</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" name="power" value="forward" id="forward" checked>
+                    <label for="forward">Forward</label>
+                </div>
+            </div>
+        </div>
 
-        <label>
-            <input type="radio" name="power" value="forward" checked> forward
-        </label>
+        <div class="speed-display">
+            <div class="speed-label">Current Speed</div>
+            <div id="speedText" class="speed-value">0</div>
+        </div>
 
-        <p>Current speed : <span id="speedText" class="value">0</span></p>
-
-        <label>
-            <input type="range" min="0" max="255" value="0" id="slider">
-        </label>
+        <div class="slider-container">
+            <span class="slider-label">Speed Control</span>
+            <div class="slider-wrapper">
+                <input type="range" min="0" max="255" value="0" id="slider">
+                <div class="slider-ticks">
+                    <span class="tick">0</span>
+                    <span class="tick">128</span>
+                    <span class="tick">255</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js" defer></script>
-    </body>
+</body>
 </html>

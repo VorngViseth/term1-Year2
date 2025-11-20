@@ -33,6 +33,12 @@ void handleScript() {
   fileJs.close();
 }
 
+void handleCSS() {
+  File fileCss = LittleFS.open("/style.css", "r");
+  server.streamFile(fileCss, "text/css");
+  fileCss.close();
+}
+
 // Unified handler for both speed and direction
 void handleMotorControl() {
   if (server.hasArg("plain")) {
@@ -110,6 +116,7 @@ void setup() {
 
   // Routes
   server.on("/", handleRoot);
+  server.on("/style.css", handleCss);
   server.on("/script.js", handleScript);
   server.on("/setSpeedAndDirection", HTTP_POST, handleMotorControl);  // Single route for both
 
