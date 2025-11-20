@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InPut Types</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form>
+
+        <div class="name">
+            <label for="name">Name :</label>
+            <input type="text" name="name" id="name" placeholder="please enter your name">
+        </div>
+
+        <div class="email">
+            <label for="email">Email :</label>
+            <input type="email" name="email" id="email" placeholder="please enter your email">
+        </div>
+
+        <div class="password">
+            <label for="password">Password :</label>
+            <input type="password" name="password" id="password" placeholder="please enter your password">
+        </div>
+
+        <div class="age">
+            <label for="age">age :</label>
+            <input type="number" name="age" id="age" placeholder="please enter your age">
+        </div>
+
+        <div class="gender">
+            <p>Gender : </p>
+            <input type="radio" name="gender" id="male" value="male">
+            <label for="male">Male</label>            
+
+            <input type="radio" name="gender" id="female" value="female">
+            <label for="female">Female</label>
+        </div>
+
+        <div class="newsletter">
+            <label for="newsletter">Subscribe to newsletter :</label>
+            <input type="checkbox" name="newsletter" id="newsletter">
+        </div>
+
+        <div class="birthdate">
+            <label for="birthdate">Birth date :</label>
+            <input type="date" name="birthdate" id="birthdate">
+        </div>
+
+        <div class="country">
+            <label for="country">Country :</label>
+            <select name="country" id="country">
+                <option value="">select your country</option>
+                <option value="cambodia">Cambodia</option>
+                <option value="vietnam">Vietnam</option>
+                <option value="laos">Laos</option>
+            </select>
+        </div>
+
+        <div class="submit">
+            <button type="submit">Submit</button>
+        </div>
+
+    </form>
+</body>
+</html>
