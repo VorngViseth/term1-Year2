@@ -89,13 +89,16 @@ class TBracket{
 
 void pathToFinal(Node* root, string player, vector<int>& path) {
     if (root==nullptr) return ;
-
-    if(root->winner==player){
+    pathToFinal(root->left, player, path);
+    pathToFinal(root->right, player, path);
+    
+    if (root->name == player) {
+        path.push_back(root->matchId);
+    }
+    else if (root->winner == player) {
         path.push_back(root->matchId);
     }
 
-    if(root->left) pathToFinal(root->left, player, path);
-    if(root->right) pathToFinal(root->right, player, path);
 
 }
 
@@ -196,25 +199,17 @@ int main(){
     vector<string> players={"seth","hong","Ean","otdg","Hout","Chou","omra","javjit"};
     TBracket t1;
     t1.insert(players);
-
     t1.buildTree();
-
     t1.printBracket(t1.getRoot());
-
     vector<int>Path;
+    t1.pathToFinal(t1.getRoot(),"seth", Path);
 
-    t1.pathToFinal(t1.getRoot(),"Ean", Path);
-
-
-    reverse(Path.begin(),Path.end());
     for(auto i : Path){
         cout<<i<<" ";
     }
-
     cout << endl;       
     
     int round;
-    
     cout << t1.wouldMeet(t1.getRoot(), "seth", "otdg", round) << endl;
 
     return 0;
