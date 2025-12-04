@@ -14,7 +14,7 @@ class Node{
     int matchId;
     string winner;
 
-    Node(string n , int s, int id){
+    Node(string n , int s, int id){ 
         left=right=nullptr;
         name=n;
         score=s;
